@@ -1,4 +1,5 @@
 import requests
+import time
 
 def titulo():
     print('''
@@ -13,7 +14,7 @@ def titulo():
            |_|         
 #==========================================================#
 
-					By: Felipe Tesão
+		By: Felipe Tesão
 					
 #==========================================================#    
     ''')
@@ -26,14 +27,16 @@ while True:
     site = input("Digite o site: ")
     url = "http://" + site + teste
 
-    print("A url será essa:"+url)
+    print("\n\nA url será essa:"+url)
 
 
     req=requests.get(url)
 
  
     if(req.status_code != 200):
-    	print("Erro de conexão")
+    	print("\n		Erro de conexão ou site nao encontrado! Espere 3 segundos")
+    	time.sleep(3)
+    	continue
 
     if("mysql_fetch_array()" in req.text or "You have an error in your SQL" in req.text):
     	print("\n\n        SITE VULNERAVEL\n\n")
@@ -41,4 +44,6 @@ while True:
     else:
     	print("\n\n        Site nao vulneravel! :(\n\n")
 
+    print("Espere 3 segundos para fazer o proximo teste")
+    time.sleep(3)
 
